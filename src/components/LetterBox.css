@@ -1,0 +1,66 @@
+.letter-box{
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 3rem;
+    padding: auto;
+    background-color: var(--black);
+    border: 2px solid var(--background-dark);
+    border-radius: .5em;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.letter-box:not(:empty){
+    animation: onText .3s ease;
+}
+
+@keyframes onText{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.2);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+
+
+.letter-box.correct{
+    background-color: var(--wordle-green);
+    border: none;
+    animation: flip .7s ease-in-out backwards;
+}
+
+.letter-box.wrong-place{
+    background-color: var(--wordle-yellow);
+    border: none;
+    animation: flip .7s ease-in-out backwards;
+}
+
+.letter-box.incorrect{
+    background-color: var(--wordle-wrong);
+    border: none;
+    animation: flip .7s ease-in-out backwards;
+}
+
+@keyframes flip{
+    0%{
+        transform: scaleY(1);
+        background-color: var(--black);
+    }
+    49%{
+        background-color: var(--black);
+    }
+    50%{
+        transform: scaleY(0);
+    }
+    100%{
+        transform: scaleY(1);
+    }
+}
+

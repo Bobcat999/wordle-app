@@ -1,0 +1,10 @@
+.wordle-page{
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--black);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}

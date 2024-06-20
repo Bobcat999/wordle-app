@@ -1,0 +1,12 @@
+:root{
+  --background-light:#ffffff;
+  --background-dark: #343434ff;
+  --white:#ffffff;
+  --black:#000000;
+  --tea-green: #c9e4caff;
+  --cambridge-blue: #87bba2ff;
+  --burnt-sienna: #ce6c47ff;
+  --wordle-yellow: #c8b653;
+  --wordle-green: #6ca965;
+  --wordle-wrong: #787c7f;
+}

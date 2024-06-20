@@ -1,0 +1,18 @@
+.results{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--tea-green);
+    color: var(--black);
+    text-align: center;
+    width: 20rem;
+    height: 30rem;
+    border-radius: 2em;
+    box-shadow: 0 0 0 max(100vh, 100vw) rgba(27, 27, 27, 0.3);
+}
+
+.results h1{
+    font-weight: bold;
+    font-size: 3rem;
+}
