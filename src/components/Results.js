@@ -16,6 +16,7 @@ export const Results = ({results}) => {
           :
           <>
             <h1>You Lost</h1>
+            <p>Better luck next time</p>
           </>
         }
         <h2>Keyword: {results.keyWord.charAt(0).toUpperCase() + results.keyWord.slice(1).toLowerCase()}</h2>

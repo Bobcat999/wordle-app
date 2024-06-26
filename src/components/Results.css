@@ -7,7 +7,7 @@
     color: var(--black);
     text-align: center;
     width: 20rem;
-    height: 30rem;
+    height: fit-content;
     padding: 1rem;
     border-radius: 2em;
     box-shadow: 0 0 0 max(100vh, 100vw) rgba(27, 27, 27, 0.3);

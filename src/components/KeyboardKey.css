@@ -1,0 +1,21 @@
+.keyboard-key{
+    background-color: var(--wordle-wrong);
+    width: 1.2em;
+    text-align: center;
+    font-size: 2rem;
+    color: var(--white);
+    font-weight: bold;
+    border-radius: .2em;
+}
+
+.keyboard-key.incorrect{
+    background-color: var(--background-dark);
+}
+
+.keyboard-key.wrong-place{
+    background-color: var(--wordle-yellow);
+}
+
+.keyboard-key.correct{
+    background-color: var(--wordle-green);
+}
