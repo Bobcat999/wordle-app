@@ -19,7 +19,7 @@ export const Results = ({results}) => {
             <p>Better luck next time</p>
           </>
         }
-        <h2>Keyword: {results.keyWord.charAt(0).toUpperCase() + results.keyWord.slice(1).toLowerCase()}</h2>
+        <h2>The word was <strong>{results.keyWord.charAt(0).toUpperCase() + results.keyWord.slice(1).toLowerCase()}</strong></h2>
     </div>
   )
 }

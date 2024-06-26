@@ -20,6 +20,10 @@
     font-size: 2rem;
 }
 
+.results h2{
+    font-weight: normal;
+}
+
 @keyframes open{
     0%{
         top: -50%;

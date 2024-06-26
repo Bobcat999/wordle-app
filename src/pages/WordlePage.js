@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './WordlePage.css'
 import { WordleBoard } from '../components/WordleBoard'
 import { Results } from '../components/Results'
 import { Keyboard } from '../components/Keyboard';
+import { checkInGuessList, generate } from '../functions/wordList';
 
-const api_key = 'gr81u7evx04wjr661ppbbh9q2soazc8bimu1xcjpjb2kmkw5q';
+// DEPRICATED API KEYS
+// const api_key = 'gr81u7evx04wjr661ppbbh9q2soazc8bimu1xcjpjb2kmkw5q';
 //'https://api.wordnik.com/v4/words.json/randomWord?hasDictionaryDef=true&includePartOfSpeech=noun%2Cadjective%2Cverb%2Cadverb&excludePartOfSpeech=proper-noun%2Cgiven-name&minCorpusCount=100&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=5&api_key='+api_key
 
 function GameResults(hasWon, finalGuessIndex, guesses, keyWord) {
@@ -20,22 +22,25 @@ export const WordlePage = () => {
   const [currentGuessIndex, setCurrentGuessIndex] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [results, setResults] = useState(new GameResults(false, 6, guesses, keyWord));
+  const [isShaking, setIsShaking] = useState(null);
 
-  //fetch the keyword
+  const isDaily = false;
+
+  //set the word
   useEffect(() => {
-    fetch('https://random-word.ryanrk.com/api/en/word/random/?length=5')
-      .then(response => {
-        if (!response.ok) {
-          //throw new Error('Network response was not ok');
-          console.error("API ERROR: Could not find word");
-          return 'CRANE'
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setKeyWord(data.toString().toUpperCase());
-      })
+    if(gameOver) return;
+    const currentDate = new Date().toLocaleDateString();
+    const wordGenerationOptions = {
+      exactly: 1,
+      minLength: 5, 
+      maxLength: 5
+    }
+    if (isDaily) wordGenerationOptions.seed = currentDate;//use the daily word if it is in daily mode
+
+    const newKeyWord = generate(wordGenerationOptions)[0]; //Comes out as an array but only select first element
+    setKeyWord(newKeyWord.toUpperCase());
+    //Debug only
+    console.log('KeyWord: ' + newKeyWord);
   }, [])
 
   const handleKeyPress = (event) => {
@@ -56,14 +61,21 @@ export const WordlePage = () => {
       newGuesses[currentGuessIndex] = currentGuess;
       setGuesses(newGuesses);
     } else if (event.key === 'Enter' && currentGuess.length === 5) {
-      //check if the word matches the keyword
+      //check if the word matches the keyword - WIN
       if (currentGuess === keyWord) {
         setTimeout(() => {
           handleGameEnd(true, currentGuessIndex)
         }, 3000
         );
       }
-      //check if its a word --TODO
+      //check if the word is in the words list
+      const inWordList = checkInGuessList(currentGuess);
+      if(!inWordList){
+        nonWordGuessed();
+        return;
+      }
+
+      //Handle the incorrect guess
       setCurrentGuessIndex(currentGuessIndex + 1);
       if (currentGuessIndex === 5) {
         setTimeout(() => {
@@ -81,9 +93,18 @@ export const WordlePage = () => {
     console.log(new GameResults(hasWon, finalGuessIndex, guesses, keyWord));
   }
 
+  const nonWordGuessed = () => {
+    //do shake animation
+    setIsShaking(true);
+    //reset after animation end
+    setTimeout(() => {
+      setIsShaking(null);
+    }, 300);
+  }
+
   return (
     <div className='wordle-page' onKeyDown={handleKeyPress} tabIndex={0}>
-      <WordleBoard keyWord={keyWord} guesses={guesses} currentGuessIndex={currentGuessIndex} />
+      <WordleBoard keyWord={keyWord} guesses={guesses} currentGuessIndex={currentGuessIndex} isShaking={isShaking}/>
       <Keyboard handleKeyPress={handleKeyPress} guesses={guesses} currentGuessIndex={currentGuessIndex} keyWord={keyWord} />
       {
         gameOver &&
