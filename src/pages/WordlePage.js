@@ -67,6 +67,8 @@ export const WordlePage = () => {
           handleGameEnd(true, currentGuessIndex)
         }, 3000
         );
+        setCurrentGuessIndex(currentGuessIndex + 1);
+        return;
       }
       //check if the word is in the words list
       const inWordList = checkInGuessList(currentGuess);
