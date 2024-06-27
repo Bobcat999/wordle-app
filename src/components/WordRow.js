@@ -15,7 +15,6 @@ export const WordRow = ({guess = '', keyWord = '', isShaking}) => {
         //get the green letters
         for(let i = 0; i < keyWordArr.length; i++){
             if(guessArr[i] === keyWordArr[i]){
-                console.log('Made it here on pass: ' + i);
                 newLetterColors[i] = 'correct';
             }else{
                 misplaced.push(keyWordArr[i]);

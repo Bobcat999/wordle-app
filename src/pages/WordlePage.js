@@ -40,7 +40,7 @@ export const WordlePage = () => {
     const newKeyWord = generate(wordGenerationOptions)[0]; //Comes out as an array but only select first element
     setKeyWord(newKeyWord.toUpperCase());
     //Debug only
-    console.log('KeyWord: ' + newKeyWord);
+    //console.log('KeyWord: ' + newKeyWord);
   }, [])
 
   const handleKeyPress = (event) => {
