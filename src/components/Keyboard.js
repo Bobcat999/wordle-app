@@ -2,7 +2,11 @@ import React from 'react';
 import './Keyboard.css';
 import { KeyboardKey } from './KeyboardKey';
 
-const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const keyboardRows = [
+  'QWERTYUIOP',
+  'ASDFGHJKL',
+  'ZXCVBNM'
+]
 
 export const Keyboard = ({handleKeyPress, guesses, currentGuessIndex, keyWord}) => {
 
@@ -42,15 +46,29 @@ export const Keyboard = ({handleKeyPress, guesses, currentGuessIndex, keyWord}) 
   return (
     <div className='keyboard'>
       {
-        alphabet.split('').map((key, index) => {
-          return <KeyboardKey 
-            keyboardKey={key} 
-            handleKeyPress={handleKeyPress} 
-            key={index} 
-            coloring={evaluateLetter(key)}/>
+        keyboardRows.map((row, index) => {
+          return <div className='keyboard-row'>
+            {index === 2 && <KeyboardKey keyboardKey={'Backspace'} handleKeyPress={handleKeyPress}/>}
+            {
+              row.split('').map((key, index) => {
+                return <KeyboardKey 
+                  keyboardKey={key} 
+                  handleKeyPress={handleKeyPress} 
+                  key={index} 
+                  coloring={evaluateLetter(key)}/>
+              })
+            }
+            {index === 2 && <KeyboardKey keyboardKey={'Enter'} handleKeyPress={handleKeyPress}/>}
+          </div>
         })
+        // alphabet.split('').map((key, index) => {
+        //   return <KeyboardKey 
+        //     keyboardKey={key} 
+        //     handleKeyPress={handleKeyPress} 
+        //     key={index} 
+        //     coloring={evaluateLetter(key)}/>
+        // })
       }
-      <KeyboardKey keyboardKey={'Enter'} handleKeyPress={handleKeyPress}/>
     </div>
   )
 }

@@ -10,8 +10,8 @@ export const KeyboardKey = ({keyboardKey, handleKeyPress, coloring}) => {
     }
 
   return (
-    <div className={'keyboard-key ' + coloring} style={keyboardKey === 'Enter' ? {gridColumn: 'span 2', width: 3 + 'em'} : {}} onClick={handleClick}>
-        {keyboardKey}
+    <div className={'keyboard-key ' + coloring} style={keyboardKey === 'Enter' || keyboardKey == 'Backspace' ? {width: 'fit-content', paddingLeft: '.2em', paddingRight: '.2em'} : {}} onClick={handleClick}>
+        {keyboardKey !== 'Backspace' ? keyboardKey: 'Del'}
     </div>
   )
 }

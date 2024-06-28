@@ -1,11 +1,13 @@
 .keyboard-key{
     background-color: var(--wordle-wrong);
     width: 1.2em;
+    padding: .2em;
     text-align: center;
     font-size: 2rem;
     color: var(--white);
     font-weight: bold;
     border-radius: .2em;
+    margin: .1em;
 }
 
 .keyboard-key.incorrect{
